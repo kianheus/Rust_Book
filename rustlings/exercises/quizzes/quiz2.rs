@@ -33,21 +33,21 @@ mod my_module {
 
         let mut output: Vec<String> = Vec::new();
 
-        for mut item in input {
-            match item.1 {
+        for (string, command) in input {
+
+            let new_string = match command {
                 Command::Uppercase => {
-                    output.push(item.0.to_uppercase());
+                    string.to_uppercase()
                 }
                 Command::Trim => {
-                    output.push(item.0.trim().to_string());
+                    string.trim().to_string()
                 }
-                Command::Append(size) => {
-                    for _i in 0..size {
-                        item.0.push_str("bar");
-                    }
-                    output.push(item.0);
+                Command::Append(repeats) => {
+                    string + &"bar".repeat(repeats)
                 }
-            }
+            };
+
+            output.push(new_string);
         }
     
         output
